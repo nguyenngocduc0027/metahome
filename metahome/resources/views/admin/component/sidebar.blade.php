@@ -37,13 +37,13 @@
                 <li class="nav-item">
                     <a data-bs-toggle="collapse" href="#base">
                         <i class="fas fa-address-book"></i>
-                        <p>Tài Khoản</p>
+                        <p>Accounts</p>
                         <span class="caret"></span>
                     </a>
                     <div class="collapse" id="base">
                         <ul class="nav nav-collapse">
-                            <li><a href="#"><span class="sub-item">Quản Lý</span></a></li>
-                            <li><a href="#"><span class="sub-item">Khách Thuê</span></a></li>
+                            <li><a href="{{route('account-show')}}"><span class="sub-item">List Account</span></a></li>
+                            <li><a href="#"><span class="sub-item">Permission</span></a></li>
                         </ul>
                     </div>
                 </li>
