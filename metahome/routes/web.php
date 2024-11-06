@@ -21,3 +21,4 @@ Route::get('/', function () {
 
 // Account
 Route::get('/account', [AccountController::class, 'show'])->name('account-show');
+Route::get('/detail-account', [AccountController::class, 'detail'])->name('account-detail');

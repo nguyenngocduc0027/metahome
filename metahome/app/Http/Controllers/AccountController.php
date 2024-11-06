@@ -10,4 +10,9 @@ class AccountController extends Controller
     public function show(){
         return view('admin.pages.account.show');
     }
+
+    // detail account
+    public function detail(){
+        return view('admin.pages.account.detail');
+    }
 }
