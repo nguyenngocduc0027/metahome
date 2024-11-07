@@ -15,4 +15,9 @@ class AccountController extends Controller
     public function detail(){
         return view('admin.pages.account.detail');
     }
+
+    // edit account
+    public function edit(){
+        return view('admin.pages.account.edit');
+    }
 }

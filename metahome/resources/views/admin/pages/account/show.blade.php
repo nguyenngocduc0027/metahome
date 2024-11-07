@@ -135,12 +135,12 @@
                                             <td>
                                                 <div class="form-button-action">
                                                     <a type="button" data-bs-toggle="tooltip" title=""
-                                                        class="btn btn-link btn-primary btn-lg"
+                                                        class="btn btn-link btn-primary"
                                                         data-original-title="Detail" href="{{route('account-detail')}}">
                                                         <i class="fa fa-eye"></i>
                                                     </a>
                                                     <a type="button" data-bs-toggle="tooltip" title=""
-                                                        class="btn btn-link btn-primary btn-lg" data-original-title="Edit">
+                                                        class="btn btn-link btn-primary" data-original-title="Edit" href="{{route('account-edit')}}">
                                                         <i class="fa fa-edit"></i>
                                                     </a>
                                                     <a type="button" data-bs-toggle="tooltip" title=""
