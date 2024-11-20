@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Avatar;
 use Illuminate\Http\Request;
 
 class AccountController extends Controller
@@ -18,6 +19,8 @@ class AccountController extends Controller
 
     // edit account
     public function edit(){
-        return view('admin.pages.account.edit');
+        $id_ava = 1;
+        $avatar = Avatar::find($id_ava);
+        return view('admin.pages.account.edit', compact('avatar'));
     }
 }

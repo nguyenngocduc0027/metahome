@@ -23,10 +23,12 @@
     <meta name="msapplication-TileImage" content="images/favicon/ms-icon-144x144.png">
     <meta name="theme-color" content="#FFFFFF00">
 
+    <meta name="token" content="{{ csrf_token() }}">
+
     <!-- Fonts and icons -->
     <script src="assets/js/plugin/webfont/webfont.min.js"></script>
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.min.css">
+    <link rel="stylesheet" href="assets/css/croppie.css" />
     <script>
         WebFont.load({
             google: {
@@ -46,15 +48,24 @@
             },
         });
     </script>
+    <script>
+        #cropped-result {
+  margin-top:100px;
+}
+    </script>
 
     <!-- CSS Files -->
     <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
     <link rel="stylesheet" href="assets/css/plugins.min.css" />
     <link rel="stylesheet" href="assets/css/kaiadmin.min.css" />
+    <link rel="stylesheet" href="assets/css/style.css">
 
 
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link rel="stylesheet" href="assets/css/demo.css" />
+
+
+
 </head>
 
 <body>
@@ -106,9 +117,7 @@
     <script src="assets/js/kaiadmin.min.js"></script>
 
     <!-- Croppie -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.min.js"
-        integrity="sha512-Gs+PsXsGkmr+15rqObPJbenQ2wB3qYvTHuJO6YJzPe/dTLvhy0fmae2BcnaozxDo5iaF8emzmCZWbQ1XXiX2Ig=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="assets/js/croppie.js"></script>
 
     <script>
         $(document).ready(function() {
@@ -170,22 +179,32 @@
 
 <script>
     $(document).ready(function(){
+        $.ajaxSetup({
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="token"]').attr('content')
+      }
+    });
 
         $image_crop = $('#image_demo').croppie({
             enableExif: true,
+            enableResize: false,
+            enableOrientation: true,
             viewport: {
-                width:300,
-                height:300,
-                type:'square' //circle
+                width:400,
+                height:400,
+                type:'circle' //circle
             },
             boundary:{
-                width:400,
-                height:500
+                width: 450,
+                height:450
             }
         });
         $('#before_crop_image').on('change', function(){
             var reader = new FileReader();
             reader.onload = function (event) {
+                var base64data = reader.result;
+                $('#base64-image').val(base64data);
+
                 $image_crop.croppie('bind', {
                     url: event.target.result
                 }).then(function(){
@@ -197,7 +216,20 @@
 
         });
         $('.crop_image').click(function(event){
-            alert();
+            $image_crop.croppie('result',{
+                type: 'canvas',
+                size: 'viewport'
+            }).then(function(response){
+                $.ajax({
+                    url: '{{route('store')}}',
+                    type: 'POST',
+                    data: {'_token': $('meta[name="csrf-token"]').attr('content'), 'image': response},
+                    success: function(data){
+                        $('#imageModel').modal('hide');
+                        alert('Success');
+                    }
+                })
+            });
         });
     });
     </script>

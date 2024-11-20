@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\AccountController;
+use App\Http\Controllers\AvatarController;
+use App\Models\Avatar;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,4 +24,5 @@ Route::get('/', function () {
 // Account
 Route::get('/account', [AccountController::class, 'show'])->name('account-show');
 Route::get('/detail-account', [AccountController::class, 'detail'])->name('account-detail');
-Route::get('/edit', [AccountController::class, 'edit'])->name('account-edit');
+Route::get('/edit-account', [AccountController::class, 'edit'])->name('account-edit');
+Route::post('/store', [AvatarController::class, 'store'])->name('store');

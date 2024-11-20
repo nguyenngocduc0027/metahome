@@ -11,9 +11,15 @@
                 <div class="col-md-4">
                     <div class="card">
                         <div class="card-body">
+                            <h4>Avatar Image</h4>
                             <input type="file" name="before_crop_image" id="before_crop_image" accept="image/*">
-
-
+                            <input type="hidden" name="base64_image" id="base64-image" accept="image/*">
+                            <div class="image_preview">
+                                <img id="img_review" src="/images/avatar/{{$avatar->title}}" alt="..." class="avatar-img rounded-circle">
+                            </div>
+                            <div class="text-center">
+                                <button class="btn btn-success">Update</button>
+                            </div>
 
                         </div>
                     </div>
@@ -29,19 +35,20 @@
         </div>
     </div>
     <!-- Modal -->
-    <div id="imageModel" class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div id="imageModel" class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Crop and Resize Avatar</h5>
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Crop and Resize Avatar</h5>
+                </div>
+                <div class="modal-body">
+                    <div id="image_demo" style="margin-top:30px"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary crop_image">Crop</button>
+                </div>
             </div>
-            <div class="modal-body">
-            <div id="image_demo" style="width:350px; margin-top:30px"></div>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-primary crop_image">Crop</button>
-            </div>
-          </div>
         </div>
-      </div>
+    </div>
 @endsection
