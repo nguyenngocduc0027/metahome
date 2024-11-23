@@ -43,7 +43,7 @@
                     <div class="collapse" id="base">
                         <ul class="nav nav-collapse">
                             <li><a href="{{route('account-show')}}"><span class="sub-item">List Account</span></a></li>
-                            <li><a href="#"><span class="sub-item">Permission</span></a></li>
+                            <li><a href="{{route('account-permission')}}"><span class="sub-item">Permission</span></a></li>
                         </ul>
                     </div>
                 </li>
