@@ -21,8 +21,8 @@
                             </div>
                             <div class="col-md-6 ms-auto me-auto">
                                 <div class="text-center">
-                                    <p class="pt-2 h3">Nguyen Ngoc Duc</p>
-                                    <p class="pt-1 h5">Nam</p>
+                                    <p class="pt-2 h3">{{$user->name}}</p>
+                                    <p class="pt-1 h5">{{$user->gender}}</p>
                                 </div>
                             </div>
                             <div class="row">
@@ -30,20 +30,20 @@
                                     <div class="form-group">
                                         <label for="email">Email</label>
                                         <input type="text" class="form-control" id="email"
-                                            value="ngocduc.bk.hust@gmail.com" disabled>
+                                            value="{{$user->email}}" disabled>
                                     </div>
                                 </div>
                                 <div class="col-md-4 col-lg-4">
                                     <div class="form-group">
                                         <label for="phone">Phone</label>
-                                        <input type="text" class="form-control" id="phone" value="0378049798"
+                                        <input type="text" class="form-control" id="phone" value="{{$user->phone}}"
                                             disabled>
                                     </div>
                                 </div>
                                 <div class="col-md-4 col-lg-4">
                                     <div class="form-group">
                                         <label for="CCCD">CCCD</label>
-                                        <input type="text" class="form-control" id="CCCD" value="038099013860"
+                                        <input type="text" class="form-control" id="CCCD" value="{{$user->cccd}}"
                                             disabled>
                                     </div>
                                 </div>
@@ -52,21 +52,21 @@
                                 <div class="col-md-2 col-lg-2">
                                     <div class="form-group">
                                         <label for="dob">Date of Birth</label>
-                                        <input type="text" class="form-control" id="dob" value="16/05/1999"
+                                        <input type="text" class="form-control" id="dob" value="{{$user->dob}}"
                                             disabled>
                                     </div>
                                 </div>
                                 <div class="col-md-2 col-lg-2">
                                     <div class="form-group">
                                         <label for="role">Role</label>
-                                        <input type="text" class="form-control" id="role" value="Admin" disabled>
+                                        <input type="text" class="form-control" id="role" value="{{$user->role}}" disabled>
                                     </div>
                                 </div>
                                 <div class="col-md-8 col-lg-8">
                                     <div class="form-group">
                                         <label for="address">Address</label>
                                         <input type="text" class="form-control" id="address"
-                                            value="Thon 4, Quang Giao, Quang Xuong, Thanh Hoa" disabled>
+                                            value="{{$user->address}}" disabled>
                                     </div>
                                 </div>
                             </div>

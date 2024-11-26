@@ -12,30 +12,34 @@ class AccountController extends Controller
     // show list account
     public function show()
     {
-        return view('admin.pages.account.show');
+        $account = User::all();
+        return view('admin.pages.account.show', compact('account'));
     }
 
     // add account admin
     public function add(Request $request)
     {
+        $user = new User();
+        $user->name = $request->name;
+        $user->phone = $request->phone;
+        $user->email = $request->email;
+        $user->cccd = $request->cccd;
+        $user->dob = $request->dob;
+        $user->gender = $request->gender;
+        $user->role = $request->role;
+        $user->address = $request->address;
+        $user->password = Hash::make($request->password);
+        $user->save();
 
-        $user = User::create([
-            'name' => $request->name,
-            'phone' => $request->phone,
-            'email' => $request->name,
-            'cccd' => $request->name,
-            'dob' => $request->name,
-            'gender' => $request->name,
-            'role' => $request->name,
-            'address' => $request->name,
-            'password' => Hash::make($request->password),
-        ]);
+
+        return redirect('/account');
     }
 
     // detail account
-    public function detail()
+    public function detail($userId)
     {
-        return view('admin.pages.account.detail');
+        $user = User::find($userId);
+        return view('admin.pages.account.detail', compact('user'));
     }
 
     // edit account

@@ -23,9 +23,10 @@ Route::get('/', function () {
 
 // Account
 Route::get('/account', [AccountController::class, 'show'])->name('account-show');
-Route::get('/detail-account', [AccountController::class, 'detail'])->name('account-detail');
+Route::get('/detail-account-{userId}', [AccountController::class, 'detail']);
 Route::get('/edit-account', [AccountController::class, 'edit'])->name('account-edit');
 Route::get('/permission-account', [AccountController::class, 'permission'])->name('account-permission');
+Route::post('/add-account', [AccountController::class, 'add'])->name('add-account');
 
 
 // Avatar

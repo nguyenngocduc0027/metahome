@@ -29,54 +29,56 @@
                                                 Create a new account using this form, make sure you
                                                 fill them all
                                             </p>
-                                            <form>
+                                            <form action="{{ route('add-account') }}" method="POST">
+                                                @csrf
                                                 <div class="row">
                                                     <div class="col-md-6 ">
                                                         <div class="form-group form-group-default">
                                                             <label>Name</label>
-                                                            <input id="addName" type="text" class="form-control"
-                                                                placeholder="fill name" />
+                                                            <input id="name" type="text" class="form-control"
+                                                                name="name" placeholder="fill name" />
                                                         </div>
                                                     </div>
                                                     <div class="col-md-6 ">
                                                         <div class="form-group form-group-default">
                                                             <label>Phone</label>
-                                                            <input id="addPhone" type="text" class="form-control"
-                                                                maxlength="10" placeholder="fill phone" />
+                                                            <input id="phone" type="text" class="form-control"
+                                                                name="phone" maxlength="10" placeholder="fill phone" />
                                                         </div>
                                                     </div>
                                                     <div class="col-md-6">
                                                         <div class="form-group form-group-default">
                                                             <label>Email</label>
-                                                            <input id="addEmail" type="email" class="form-control"
-                                                                placeholder="fill email" />
+                                                            <input id="email" type="email" class="form-control"
+                                                                name="email" placeholder="fill email" />
                                                         </div>
                                                     </div>
                                                     <div class="col-md-6">
                                                         <div class="form-group form-group-default">
                                                             <label>CCCD</label>
-                                                            <input id="addCCCD" type="text" class="form-control"
-                                                                maxlength="12" placeholder="fill CCCD" />
+                                                            <input id="cccd" type="text" class="form-control"
+                                                                name="cccd" maxlength="12" placeholder="fill CCCD" />
                                                         </div>
                                                     </div>
                                                     <div class="col-md-6">
                                                         <div class="form-group form-group-default">
                                                             <label>Date of Birth</label>
-                                                            <input id="addDateofBirth" type="date" class="form-control"
-                                                                placeholder="fill dob" />
+                                                            <input id="dob" type="date" class="form-control"
+                                                                name="dob" placeholder="fill dob" />
                                                         </div>
                                                     </div>
                                                     <div class="col-md-6">
                                                         <div class="form-group form-group-default">
                                                             <label>Password</label>
-                                                            <input id="addPassword" type="text" class="form-control"
-                                                                minlength="8" placeholder="fill password" />
+                                                            <input id="password" type="text" class="form-control"
+                                                                name="password" minlength="8"
+                                                                placeholder="fill password" />
                                                         </div>
                                                     </div>
                                                     <div class="col-md-6">
                                                         <div class="form-group form-group-default">
                                                             <label>Gender</label>
-                                                            <select class="form-select" id="selectGender">
+                                                            <select class="form-select" id="gender" name="gender">
                                                                 <option>Male</option>
                                                                 <option>Female</option>
                                                             </select>
@@ -85,7 +87,7 @@
                                                     <div class="col-md-6">
                                                         <div class="form-group form-group-default">
                                                             <label>Role</label>
-                                                            <select class="form-select" id="selectRole">
+                                                            <select class="form-select" id="role" name="role">
                                                                 <option>Manager</option>
                                                                 <option>User</option>
                                                             </select>
@@ -94,18 +96,19 @@
                                                     <div class="col-md-12">
                                                         <div class="form-group form-group-default">
                                                             <label>Address</label>
-                                                            <input id="addAddress" type="text" class="form-control"
+                                                            <input id="address" type="text" class="form-control" name="address"
                                                                 minlength="8" placeholder="fill address" />
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </form>
+
                                         </div>
                                         <div class="modal-footer border-0">
-                                            <button type="button" id="" class="btn btn-primary">
+                                            <button type="submit" id="" class="btn btn-primary">
                                                 Add
                                             </button>
                                         </div>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
@@ -128,28 +131,31 @@
                                         </tr>
                                     </tfoot>
                                     <tbody>
-                                        <tr>
-                                            <td>Nguyen Ngoc Duc</td>
-                                            <td>ngocduc.bk.hust@gmail.com</td>
-                                            <td>0378049798</td>
-                                            <td>
-                                                <div class="form-button-action">
-                                                    <a type="button" data-bs-toggle="tooltip" title=""
-                                                        class="btn btn-link btn-primary"
-                                                        data-original-title="Detail" href="{{route('account-detail')}}">
-                                                        <i class="fa fa-eye"></i>
-                                                    </a>
-                                                    <a type="button" data-bs-toggle="tooltip" title=""
-                                                        class="btn btn-link btn-primary" data-original-title="Edit" href="{{route('account-edit')}}">
-                                                        <i class="fa fa-edit"></i>
-                                                    </a>
-                                                    <a type="button" data-bs-toggle="tooltip" title=""
-                                                        class="btn btn-link btn-danger" data-original-title="Remove">
-                                                        <i class="fa fa-times"></i>
-                                                    </a>
-                                                </div>
-                                            </td>
-                                        </tr>
+                                        @foreach ($account as $user)
+                                            <tr>
+                                                <td>{{ $user->name }}</td>
+                                                <td>{{ $user->email }}</td>
+                                                <td>{{ $user->phone }}</td>
+                                                <td>
+                                                    <div class="form-button-action">
+                                                        <a type="button" data-bs-toggle="tooltip" title=""
+                                                            class="btn btn-link btn-primary" data-original-title="Detail"
+                                                            href="{{ url('/detail-account-'. $user->id) }}">
+                                                            <i class="fa fa-eye"></i>
+                                                        </a>
+                                                        <a type="button" data-bs-toggle="tooltip" title=""
+                                                            class="btn btn-link btn-primary" data-original-title="Edit"
+                                                            href="{{ route('account-edit') }}">
+                                                            <i class="fa fa-edit"></i>
+                                                        </a>
+                                                        <a type="button" data-bs-toggle="tooltip" title=""
+                                                            class="btn btn-link btn-danger" data-original-title="Remove">
+                                                            <i class="fa fa-times"></i>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>
