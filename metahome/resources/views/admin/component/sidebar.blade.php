@@ -35,17 +35,10 @@
                     <h4 class="text-section">Components</h4>
                 </li>
                 <li class="nav-item">
-                    <a data-bs-toggle="collapse" href="#base">
+                    <a  href="{{route('account-show')}}">
                         <i class="fas fa-address-book"></i>
                         <p>Accounts</p>
-                        <span class="caret"></span>
                     </a>
-                    <div class="collapse" id="base">
-                        <ul class="nav nav-collapse">
-                            <li><a href="{{route('account-show')}}"><span class="sub-item">List Account</span></a></li>
-                            <li><a href="{{route('account-permission')}}"><span class="sub-item">Permission</span></a></li>
-                        </ul>
-                    </div>
                 </li>
                 {{-- <li class="nav-item">
                     <a data-bs-toggle="collapse" href="#base">

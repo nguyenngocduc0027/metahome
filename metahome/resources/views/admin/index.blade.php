@@ -49,9 +49,9 @@
         });
     </script>
     <script>
-        #cropped-result {
-  margin-top:100px;
-}
+        #cropped - result {
+            margin - top: 100 px;
+        }
     </script>
 
     <!-- CSS Files -->
@@ -59,13 +59,6 @@
     <link rel="stylesheet" href="assets/css/plugins.min.css" />
     <link rel="stylesheet" href="assets/css/kaiadmin.min.css" />
     <link rel="stylesheet" href="assets/css/style.css">
-
-
-    <!-- CSS Just for demo purpose, don't include it in your project -->
-    <link rel="stylesheet" href="assets/css/demo.css" />
-
-
-
 </head>
 
 <body>
@@ -177,61 +170,67 @@
         });
     </script>
 
-<script>
-    $(document).ready(function(){
-        $.ajaxSetup({
-      headers: {
-        'X-CSRF-TOKEN': $('meta[name="token"]').attr('content')
-      }
-    });
+    <script>
+        $(document).ready(function() {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="token"]').attr('content')
+                }
+            });
 
-        $image_crop = $('#image_demo').croppie({
-            enableExif: true,
-            enableResize: false,
-            enableOrientation: true,
-            viewport: {
-                width:400,
-                height:400,
-                type:'circle' //circle
-            },
-            boundary:{
-                width: 450,
-                height:450
-            }
-        });
-        $('#before_crop_image').on('change', function(){
-            var reader = new FileReader();
-            reader.onload = function (event) {
-                var base64data = reader.result;
-                $('#base64-image').val(base64data);
+            $image_crop = $('#image_demo').croppie({
+                enableExif: true,
+                enableResize: false,
+                enableOrientation: true,
+                viewport: {
+                    width: 400,
+                    height: 400,
+                    type: 'circle' //circle
+                },
+                boundary: {
+                    width: 450,
+                    height: 450
+                }
+            });
+            $('#before_crop_image').on('change', function() {
+                var reader = new FileReader();
+                reader.onload = function(event) {
+                    var base64data = reader.result;
+                    $('#base64-image').val(base64data);
 
-                $image_crop.croppie('bind', {
-                    url: event.target.result
-                }).then(function(){
-                    console.log('jQuery bind complete');
+                    $image_crop.croppie('bind', {
+                        url: event.target.result
+                    }).then(function() {
+                        console.log('jQuery bind complete');
+                    });
+                }
+                reader.readAsDataURL(this.files[0]);
+                $('#imageModel').modal('show');
+
+            });
+            $('.crop_image').click(function(event) {
+                $image_crop.croppie('result', {
+                    type: 'canvas',
+                    size: 'viewport'
+                }).then(function(response) {
+                    var userId = $("input[name='user']").val();
+                    $.ajax({
+                        url: '{{ route('store') }}',
+                        type: 'POST',
+                        data: {
+                            '_token': $('meta[name="csrf-token"]').attr('content'),
+                            'image': response,
+                            'userId': userId,
+                        },
+                        success: function(data) {
+                            $('#imageModel').modal('hide');
+                            alert('Success');
+                            location.reload();
+                        }
+                    })
                 });
-            }
-            reader.readAsDataURL(this.files[0]);
-            $('#imageModel').modal('show');
-
-        });
-        $('.crop_image').click(function(event){
-            $image_crop.croppie('result',{
-                type: 'canvas',
-                size: 'viewport'
-            }).then(function(response){
-                $.ajax({
-                    url: '{{route('store')}}',
-                    type: 'POST',
-                    data: {'_token': $('meta[name="csrf-token"]').attr('content'), 'image': response},
-                    success: function(data){
-                        $('#imageModel').modal('hide');
-                        alert('Success');
-                    }
-                })
             });
         });
-    });
     </script>
 
 </body>

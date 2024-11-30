@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Avatar;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 class AvatarController extends Controller
 {
@@ -19,14 +21,27 @@ class AvatarController extends Controller
 
         $imageName = uniqid() . '.png';
 
-        $imageFullPath = $folderPath.$imageName;
+        $imageFullPath = $folderPath . $imageName;
 
         file_put_contents($imageFullPath, $image_base64);
 
-         $saveFile = new Avatar;
-         $saveFile->title = $imageName;
-         $saveFile->save();
 
-        return response()->json(['success'=>'Crop Image Saved/Uploaded Successfully']);
+        $saveFile = new Avatar;
+        $saveFile->title = $imageName;
+        $saveFile->save();
+
+        $user = User::find($request->userId);
+        if ($user->avatar == 'avatar.png') {
+            $user->avatar = $imageName;
+            $user->save();
+        } else {
+            $image_path = public_path().'/images/avatar/' . $user->avatar;  // Value is not URL but directory file path
+            File::delete($image_path);
+            $user->avatar = $imageName;
+            $user->save();
+        }
+
+
+        return response()->json(['success' => 'Crop Image Saved/Uploaded Successfully']);
     }
 }
